@@ -10,6 +10,7 @@
 # Description:       Reads two sensors and outputs audio for the unblock project
 ### END INIT INFO
 
+# http://raspberrywebserver.com/serveradmin/run-a-script-on-start-up.html
 
 case "$1" in 
     start)
