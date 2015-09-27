@@ -15,8 +15,9 @@
 case "$1" in 
     start)
         echo "Starting unblock"
+        bash /home/pi/unblock/unblock-music-runner.py &
+	sleep 3
         python /home/pi/unblock/unblock-input-reader.py &
-        python /home/pi/unblock/unblock-music-runner.py &
         ;;
     stop)
         echo "Stopping unblock"
