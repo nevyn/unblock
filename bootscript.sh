@@ -15,14 +15,14 @@
 case "$1" in 
     start)
         echo "Starting unblock"
-        bash /home/pi/unblock/unblock-music-runner.py &
+        bash /home/pi/unblock/unblock-music-runner.bash &
 	sleep 3
         python /home/pi/unblock/unblock-input-reader.py &
         ;;
     stop)
         echo "Stopping unblock"
-        killall unblock-input-reader
-        killall unblock-music-runner
+	pkill -f unblock
+	killall pd
         ;;
     *)
         echo "Usage: /etc/init.d/servod start|stop"

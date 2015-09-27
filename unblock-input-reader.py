@@ -13,5 +13,4 @@ while True:
 	for port in serials:
 		line = port.readline()
 		v1 = line.split(" ")[0]
-		print v1
 		pdsend.stdin.write(v1 +";\n")
