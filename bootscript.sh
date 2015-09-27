@@ -12,12 +12,25 @@
 
 # http://raspberrywebserver.com/serveradmin/run-a-script-on-start-up.html
 
+cd /home/pi/unblock/
+
+startup()
+{
+        mkdir -p log
+	rm -rf log/run.log
+	echo "Ok, starting for real in 10s" >> log/run.log
+	sleep 10
+        echo "Ok, starting for real" >> log/run.log
+        bash unblock-music-runner.bash &> log/music.log &
+        sleep 3
+        python unblock-input-reader.py &> log/input.log &
+        echo "Done" >> log/run.log
+}
+
 case "$1" in 
     start)
         echo "Starting unblock"
-        bash /home/pi/unblock/unblock-music-runner.bash &
-	sleep 3
-        python /home/pi/unblock/unblock-input-reader.py &
+	startup &
         ;;
     stop)
         echo "Stopping unblock"
