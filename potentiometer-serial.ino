@@ -1,5 +1,6 @@
 void setup() {
-  Serial.begin(38400);
+  // Maximum for the tinyduino
+  Serial.begin(19200);
 }
 
 void loop() {
