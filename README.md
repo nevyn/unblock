@@ -10,9 +10,13 @@ Two bend sensor attach to the analog inputs of the Tinyduino. These are read at 
 
 The Raspberry Pi runs a Python script `unblock-input-reader.py` which looks for all attached serial devices and starts reading from them. It opens the `pdsend` tool to udp port 13000 and 13001, and when serial data comes in, it takes the two numbers and sends them to these two ports.
 
+### Music/audio
+
 `unblock-music-runner.bash` just configures the sound card for analog output, and then starts the puredata script `mainscene.pd`. This scene starts the oscillator (i e turns on audio), and then starts listening on 13000 and 13001. It uses these two ports as inputs to mix together a pleasant background noise which is then outputted through the sound card.
 
 (note: only horrible out-of-phase sine wave output is implemented. branch `mr/audio` starts building an accumulator value when there is activity on the swing, which can then be used as volume and/or pitch for playing the wav file that marisha is trying to get)
+
+we're also playing with using Sonic Pi to generate the audio so we can do more fun and good sounding stuff. not sure that'll be ready in time, so pd is a good fallback.
 
 ### LED lights
 
