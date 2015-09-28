@@ -6,9 +6,9 @@ Unblock is the software for the "Block By Block" interactive exhibition.
 
 ![overview](overview.png)
 
-Two bend sensor attach to the analog inputs of the Tinyduino. These are read at 20hz and sent to the serial port at 19200bps as two ascii values separated by space and terminated with newline, by the `potentiometer-serial.ino` arduino script.
+Two bend sensor attach to the analog inputs of the Tinyduino. These are read at 20hz and sent to the serial port at 19200bps as two ascii values (0-1023 inclusive) separated by space and terminated with newline (like `583 992\n`), by the `potentiometer-serial.ino` arduino script.
 
-The Raspberry Pi runs a Python script `unblock-input-reader.py` which looks for all attached serial devices and starts reading from them. It opens the 'pdsend' tool to udp port 13000 and 13001, and when serial data comes in, it takes the two numbers and sends them to these two ports (note: only 13000 is implemented so far).
+The Raspberry Pi runs a Python script `unblock-input-reader.py` which looks for all attached serial devices and starts reading from them. It opens the `pdsend` tool to udp port 13000 and 13001, and when serial data comes in, it takes the two numbers and sends them to these two ports.
 
 `unblock-music-runner.bash` just configures the sound card for analog output, and then starts the puredata script `mainscene.pd`. This scene starts the oscillator (i e turns on audio), and then starts listening on 13000 and 13001. It uses these two ports as inputs to mix together a pleasant background noise which is then outputted through the sound card.
 

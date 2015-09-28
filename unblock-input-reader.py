@@ -2,7 +2,8 @@ import serial
 import serial.tools.list_ports
 from subprocess import *
 
-pdsend = Popen(["pdsend", "13000", "localhost", "tcp"], stdin=PIPE)
+pdsend1 = Popen(["pdsend", "13000", "localhost", "tcp"], stdin=PIPE)
+pdsend2 = Popen(["pdsend", "13001", "localhost", "tcp"], stdin=PIPE)
 
 serials = []
 
@@ -14,5 +15,6 @@ while True:
 	for port in serials:
 		line = port.readline()
 		v1 = line.split(" ")[0]
-		print v1
-		pdsend.stdin.write(v1 +";\n")
+		pdsend1.stdin.write(v1 +";\n")
+		v2 = line.split(" ")[1]
+		pdsend2.stdin.write(v2 +";\n")
