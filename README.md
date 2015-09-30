@@ -12,9 +12,7 @@ The Raspberry Pi runs a Python script `unblock-input-reader.py` which looks for 
 
 ### Music/audio
 
-`unblock-music-runner.bash` just configures the sound card for analog output, and then starts the puredata script `mainscene.pd`. This scene starts the oscillator (i e turns on audio), and then starts listening on 13000 and 13001. It uses these two ports as inputs to mix together a pleasant background noise which is then outputted through the sound card.
-
-(note: only horrible out-of-phase sine wave output is implemented. branch `mr/audio` starts building an accumulator value when there is activity on the swing, which can then be used as volume and/or pitch for playing the wav file that marisha is trying to get)
+`unblock-music-runner.bash` just configures the sound card for analog output, and then starts the puredata script `mainscene.pd`. This scene starts the oscillator (i e turns on audio), and then starts listening on 13000 and 13001. It uses these two ports as inputs to mix together a pleasant background sound which is then outputted through the sound card. This sound is read from samples/audio.wav inside the unblock folder (which is not part of this repo: download it separately).
 
 we're also playing with using Sonic Pi to generate the audio so we can do more fun and good sounding stuff. not sure that'll be ready in time, so pd is a good fallback.
 
@@ -34,6 +32,7 @@ While idle, the structure could do a slow fade-in-fade-out of random colors, ind
 4. Clone it `git clone git@github.com:nevyn/unblock.git`
 4. Make it start at boot: `sudo ln -s /home/pi/unblock/bootscript.sh /etc/init.d/unblock`
 5. `sudo update-rc.d /etc/init.d/unblock defaults`
+6. install [pigpio][http://abyz.co.uk/rpi/pigpio/)
 
 nevyn has an sd card with these things installed. he's going to try to clone it to a microsd.
 
