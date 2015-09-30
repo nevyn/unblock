@@ -3,21 +3,27 @@
 
 
 import pigpio
+from subprocess import *
 
-
-class Strip(object):
-  pins = []
-  
-  def __init__(self, pin1, pin2, pin3):
-    self.pins = [pin1, pin2, pin3]
-
-strips = [
-  Strip(23, 24, 25),
-  Strip(16, 20, 21),
-  Strip(17, 27, 22),
-  Strip(6, 19, 26)
+pins = [
+  23, 24, 25, # strip 1
+  16, 20, 21, # strip 2
+  17, 27, 22, # strip 3
+  6, 19, 26   # strip 4
 ]
 
-pdrecv = Popen(["pdreceive", "3010", "localhost", "udp"])
+pdrecv = Popen(["pdreceive", "3010", "udp"], stdout=PIPE)
 
+pi = pigpio.pi()
+
+
+for line in iter(pdrecv.stdout.readline,''):
+  line = line.rstrip("\n ;")
+  comps = line.split(" ")
+  if comps[0] != "setleds":
+    continue
+  i = 0
+  for comp in comps[1:]:
+    pi.set_PWM_dutycycle(pins[i], int(comp))
+    i = i+1
 

@@ -21,6 +21,9 @@ startup()
 	echo "Ok, starting for real in 10s" >> log/run.log
 	sleep 10
         echo "Ok, starting for real" >> log/run.log
+        pigpiod
+	sleep 1
+	python unblock-led-runner.py &> log/leds.log &
         bash unblock-music-runner.bash &> log/music.log &
         sleep 3
         python unblock-input-reader.py &> log/input.log &
