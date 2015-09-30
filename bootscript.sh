@@ -45,6 +45,9 @@ case "$1" in
         echo "Stopping unblock"
 	pkill -f unblock
 	killall pd
+	killall pigpiod
+	killall pdreceive
+	killall pdsend
         ;;
     *)
         echo "Usage: /etc/init.d/servod start|stop"

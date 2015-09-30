@@ -7,14 +7,21 @@ pdsend2 = Popen(["pdsend", "13001", "localhost", "tcp"], stdin=PIPE)
 
 serials = []
 
+print("Looking for com ports")
+
 for portuple in serial.tools.list_ports.comports():
 	print("connecting to " + str(portuple))
 	serials.append(serial.Serial(portuple[0], 9600))
 
+print("Starting to readline from comports")
+
 while True:
 	for port in serials:
 		line = port.readline()
-		v1 = line.split(" ")[0]
+		comps = line.split(" ")
+		if len(comps) < 2:
+			continue
+		v1 = comps[0]
 		pdsend1.stdin.write(v1 +";\n")
-		v2 = line.split(" ")[1]
+		v2 = comps[1]
 		pdsend2.stdin.write(v2 +";\n")
