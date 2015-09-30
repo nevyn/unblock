@@ -9,7 +9,7 @@ serials = []
 
 for portuple in serial.tools.list_ports.comports():
 	print("connecting to " + str(portuple))
-	serials.append(serial.Serial(portuple[0], 19200))
+	serials.append(serial.Serial(portuple[0], 9600))
 
 while True:
 	for port in serials:
