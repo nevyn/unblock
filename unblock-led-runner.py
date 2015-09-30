@@ -25,6 +25,6 @@ for line in iter(pdrecv.stdout.readline,''):
   i = 0
   for comp in comps[1:]:
     v = min(255, max(0, int(float(comp))))
-    pi.set_PWM_dutycycle(pins[i], int(float(comp)))
+    pi.set_PWM_dutycycle(pins[i], v)
     i = i+1
 
