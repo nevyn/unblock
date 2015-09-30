@@ -19,13 +19,19 @@ startup()
         mkdir -p log
 	rm -rf log/run.log
 	echo "Ok, starting for real in 10s" >> log/run.log
-	sleep 10
-        echo "Ok, starting for real" >> log/run.log
+	sleep 5
+        echo "Starting Pigpio" >> log/run.log
         pigpiod
-	sleep 1
+	sleep 2
+	echo "Starting led runner" >> log/run.log
 	python unblock-led-runner.py &> log/leds.log &
+	sleep 2
+	echo "Starting PureData" >> log/run.log
+
         bash unblock-music-runner.bash &> log/music.log &
         sleep 3
+
+	echo "Starting input reader" >> log/run.log
         python unblock-input-reader.py &> log/input.log &
         echo "Done" >> log/run.log
 }
